@@ -1,6 +1,6 @@
 # LiftmasterMyq
 
-Ruby gem to control a Liftmaster MyQ system
+Ruby gem to control a Liftmaster MyQ system.
 
 ## Installation
 

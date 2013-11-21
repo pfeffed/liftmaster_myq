@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["david@pfeffer.org"]
   spec.description   = %q{Unofficial Liftmaster MyQ Controller}
   spec.summary       = %q{Gem to access and control the Liftmaster MyQ garage door system.}
-  spec.homepage      = "http"
+  spec.homepage      = "http://github.com/pfeffed/liftmaster_myq"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
