@@ -14,7 +14,6 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install liftmaster_myq
     $ gem install liftmaster_myq-0.0.1.gem
 
 ## Usage
