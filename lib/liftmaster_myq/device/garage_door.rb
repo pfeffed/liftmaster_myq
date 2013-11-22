@@ -19,18 +19,18 @@ module LiftmasterMyq::Device
     end
 
     def status
-      # TODO: Check door states at during daytime when wife won't kill me for 
-      # opening and closing door.
       response = check_door_state("doorstate").parsed_response
       state = response["AttributeValue"]
-      if state == 1
-        return "open?"
-      elsif state == 2
-        return "closed?"
-      elsif state == 4
-        return "opening?"
-      elsif state == 5
-        return "closing?"
+      if state == "1"
+        return "open"
+      elsif state == "2"
+        return "closed"
+      elsif state == "4"
+        return "opening"
+      elsif state == "5"
+        return "closing"
+      else
+        return "#{state} is an unknown state for the door."
       end
     end
 
