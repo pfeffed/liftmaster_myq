@@ -1,0 +1,64 @@
+FORMAT: 1A
+HOST: http://myqexternal.myqdevice.com
+
+# Chamberlain Liftmaster MyQ API
+This is unofficial documentation of the Chamberlain/Liftmaster MyQ API used by the iOS and Android apps. It features functionality to monitor and control the garage door system remotely.  A ruby gem implementation of this API is available at http://github.com/pfeffed/liftmaster_myq. 
+
+## Constant Values
+This API has some static values:
++ Application Id = "Vj8pQggXLhLy0WHahglCD4N1nAkkXQtGYpq2HrHD7H1nvmbT55KqtN6RSF4ILB%2fi"
++ Culture = 'en' (Note: other regions may be supported as well)
+
+## Login [/Membership/ValidateUserWithCulture?appId={appId}&securityToken=null&username={username}&password={password}&culture={culture}]
+### Send login request [GET]
+You should only need to store the securityToken in the response for subsequent requests.  Also, I have noticed that sometimes the call to login returns a token that does not work.  From time to time, I have found that retrying the login call once or twice gets one that works.
++ Parameters
+    + appId (required, string) ... This appears to be a constant string value associated with the mobile app.
+    + username (required, string) ... The account's email address in url encoded format (i.e. someone@test.com -> someone%40test.com).
+    + password (required, string) ... The account password in url encoded format.
+    + culture (required, string) ... This appears to be the country code.  I have only tried it with 'en'.
+    
++ Response 200 (application/json)
+
+        {"UserId":987654,"SecurityToken":"YOUR_TOKEN_HERE","ReturnCode":"0","ErrorMessage":"","ExecutionTimes":"15.6;46.8;78;62.4","BrandId":2,"BrandName":"Chamberlain"}
+
+## System Detail [/api/UserDeviceDetails?appId={appId}&securityToken={securityToken}]
+### Get devices and information about the MyQ system [GET]
+The security token is the one received from the login request.  If the system comes back without any MyQ units, it may be a sign your login token needs to be refreshed.
++ Parameters
+    + appId (required, string) ... This appears to be a static string associated with the mobile app.
+    + securityToken (required, string) ... This appears to be a static string associated with the mobile app.
+   
++ Response 200 (application/json)
+
+        {"Devices":[{"MyQDeviceId":987654321098,"MyQDeviceTypeId":1,"MyQDeviceTypeName":"Gateway","DeviceId":"876543","DeviceName":"GW000000XXXX","TypeId":49,"TypeName":"Gateway","RegistrationDateTime":"2013-10-12T13:26:38.48","SerialNumber":"GW000000XXXX","UserName":"YOUR-USERNAME","UserConnectServerId":0,"UserCountryId":0,"Attributes":[{"Name":"deviceRecord.response","Value":"{\"id\":987654321,\"deviceCode\":{\"login\":\"XXXXXXXXXXX\",\"password\":\"XX\"},\"type\":{\"id\":47,\"nativeID\":131},\"version\":{\"major\":1,\"minor\":80,\"revision\":1024}}","UpdatedTime":"1382133086081","MyQDeviceTypeAttributeId":0,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"learnmodestate","Value":"0","UpdatedTime":"1384058789400","MyQDeviceTypeAttributeId":3,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"hwver","Value":"1.0","UpdatedTime":"1384990618614","MyQDeviceTypeAttributeId":34,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"desc","Value":"YOUR-GATEWAY-NAME","UpdatedTime":"1382133367601","MyQDeviceTypeAttributeId":28,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"enumeraterequired","Value":"0","UpdatedTime":"1384925170098","MyQDeviceTypeAttributeId":1,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"devtype","Value":"6","UpdatedTime":"1384058783970","MyQDeviceTypeAttributeId":31,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"fwver","Value":"3.0","UpdatedTime":"1384990618527","MyQDeviceTypeAttributeId":33,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"devicetablechecksum","Value":"0","UpdatedTime":"1382133351232","MyQDeviceTypeAttributeId":5,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"enumeratetimestamp","Value":"10/18/2013 4:51:24 PM","UpdatedTime":"1382133085152","MyQDeviceTypeAttributeId":7,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"removeAllDevices.response","Value":"1","UpdatedTime":"1382133084644","MyQDeviceTypeAttributeId":0,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"blver","Value":"1.0","UpdatedTime":"1384990618699","MyQDeviceTypeAttributeId":35,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"devices","Value":"XXXXXXXXX","UpdatedTime":"1382133351238","MyQDeviceTypeAttributeId":25,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"deviceCount.response","Value":"{\"checkSum\":381,\"deviceCount\":1}","UpdatedTime":"1382133085519","MyQDeviceTypeAttributeId":0,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"desiredlearnmode","Value":"0","UpdatedTime":"1384058789403","MyQDeviceTypeAttributeId":2,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"deviceName","Value":"987654321098","UpdatedTime":"","MyQDeviceTypeAttributeId":104,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"customerName","Value":"987654321098","UpdatedTime":"","MyQDeviceTypeAttributeId":4,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"}],"UpdatedBy":"EXT_API","UpdatedDate":"2013-10-18T21:51:24.68"},{"MyQDeviceId":987654,"ParentMyQDeviceId":87654,"MyQDeviceTypeId":2,"MyQDeviceTypeName":"GarageDoorOpener","DeviceId":"XXXXXXXXX","DeviceName":"987654321098","TypeId":47,"TypeName":"Garage Door Opener","UserName":"YOUR-USERNAME","UserConnectServerId":0,"UserCountryId":0,"Attributes":[{"Name":"learnmode","Value":"0","UpdatedTime":"1385071490018","MyQDeviceTypeAttributeId":55,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"aclossdetect","Value":"0","UpdatedTime":"1385071490018","MyQDeviceTypeAttributeId":57,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"flasherconnect","Value":"0","UpdatedTime":"1385071490018","MyQDeviceTypeAttributeId":58,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"worklightstate","Value":"1","UpdatedTime":"1385071490018","MyQDeviceTypeAttributeId":51,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"gatewayID","Value":"XXXXXX","UpdatedTime":"1382133351237","MyQDeviceTypeAttributeId":49,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"online","Value":"","UpdatedTime":"1384990647995","MyQDeviceTypeAttributeId":0,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"desireddoorstate","Value":"","UpdatedTime":"1385071490018","MyQDeviceTypeAttributeId":41,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"desc","Value":"Garage Door Opener","UpdatedTime":"1382133355790","MyQDeviceTypeAttributeId":50,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"doorstate","Value":"2","UpdatedTime":"1385067858624","MyQDeviceTypeAttributeId":56,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"controlledlightfeature","Value":"0","UpdatedTime":"1385071490018","MyQDeviceTypeAttributeId":43,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"diagnosticerrorstate","Value":"0","UpdatedTime":"1385071490018","MyQDeviceTypeAttributeId":54,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"addedtime","Value":"2013-10-18 21:55:51","UpdatedTime":"1382133351237","MyQDeviceTypeAttributeId":61,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"vacationmode","Value":"0","UpdatedTime":"1385071490018","MyQDeviceTypeAttributeId":52,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"radiolearnmode","Value":"0","UpdatedTime":"1385071490018","MyQDeviceTypeAttributeId":53,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"isunattendedopenallowed","Value":"1","UpdatedTime":"1385071490018","MyQDeviceTypeAttributeId":77,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"isunattendedcloseallowed","Value":"1","UpdatedTime":"1385071490018","MyQDeviceTypeAttributeId":78,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"requestdevicestatus","Value":"","UpdatedTime":"1385071490018","MyQDeviceTypeAttributeId":59,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"deviceName","Value":"987654321098","UpdatedTime":"","MyQDeviceTypeAttributeId":103,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"},{"Name":"customerName","Value":"987654321098","UpdatedTime":"","MyQDeviceTypeAttributeId":75,"IsDeviceProperty":false,"IsPersistent":false,"IsTimeSeries":false,"IsGlobal":false,"UpdatedDate":"0001-01-01T00:00:00"}],"UpdatedBy":"EXT_API","UpdatedDate":"2013-10-18T21:55:52.167"}],"ReturnCode":"0","ErrorMessage":""}
+
+## Toggle Device State [/Device/setDeviceAttribute]
+### Open or close the door (and turn lights on/off?) [PUT]
+This is used to open/close the doors.
+        
+        {
+            "AttributeName":"requestdevicestatus",
+            "DeviceId":"987654321098",
+            "ApplicationId":"APPID-FROM-CONSTANTS",
+            "AttributeValue":"1",
+            "SecurityToken":"YOUR-TOKEN"
+        }
+
++ Response 200 (application/json)
+
+        {"UpdatedTime":"1385071721231","ReturnCode":"0"}
+
+## Check Device State [/Device/getDeviceAttribute?appId={appId}&securityToken={securityToken}&devId={deviceId}&name={command}]
+### Get the status of a particular device attribute [GET]
+This can be used to check to see if a garage door is open, closed, opening, or closing.  There are probably more uses that I have not yet needed.
++ Parameters
+    + appId (required, string) ... This appears to be a static string associated with the mobile app.
+    + securityToken (required, string) ... This appears to be a static string associated with the mobile app.
+    + deviceId (required, string) ... This is the id or deviceId returned in the System Detail call to endpoint /api/UserDeviceDetails referenced above.
+    + command (required, string) ... I have only tried using 'doorstate'
+
++ Response 200 (application/json)
+
+        {"AttributeValue":"2","UpdatedTime":"1385067858624","ReturnCode":"0","ErrorMessage":""}
+
