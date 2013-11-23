@@ -15,7 +15,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install liftmaster_myq-0.0.1.gem
+    $ gem install liftmaster_myq-X.X.X.gem (Note: X.X.X should be changed to the current version number)
 
 ## Usage
 
