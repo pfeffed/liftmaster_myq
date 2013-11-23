@@ -1,6 +1,7 @@
 # LiftmasterMyq
 
-Ruby gem to control a Liftmaster MyQ system.
+Ruby gem to control a Chaimberlain Liftmaster MyQ system.
+Partial documentation of the API is available at http://docs.unofficialliftmastermyq.apiary.io/
 
 ## Installation
 
