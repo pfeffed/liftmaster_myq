@@ -25,6 +25,8 @@ module LiftmasterMyq::Device
         return "open"
       elsif state == "2"
         return "closed"
+      elsif state == "3"
+        return "stopped"
       elsif state == "4"
         return "opening"
       elsif state == "5"
