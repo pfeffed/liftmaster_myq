@@ -1,4 +1,4 @@
-Copyright (c) 2013 David Pfeffer
+Copyright (c) 2016 Trung Vo
 
 MIT License
 
