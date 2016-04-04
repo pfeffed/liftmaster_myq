@@ -1,7 +1,10 @@
-# LiftmasterMyq
+# Chamberlain/Liftmaster MyQ
 
-Ruby gem to control a Chaimberlain Liftmaster MyQ system.
+Ruby gem to control a Chamberlain/Liftmaster MyQ system.
+
 Partial documentation of the API is available at http://docs.unofficialliftmastermyq.apiary.io/
+
+Notes: the original project (pfeffed/liftmaster_myq) went inactive since Nov 2013, I forked it here to maintain/improve it.
 
 ## Installation
 

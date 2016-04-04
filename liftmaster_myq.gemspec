@@ -6,8 +6,8 @@ require 'liftmaster_myq/version'
 Gem::Specification.new do |spec|
   spec.name          = "liftmaster_myq"
   spec.version       = LiftmasterMyq::VERSION
-  spec.authors       = ["David Pfeffer"]
-  spec.email         = ["david@pfeffer.org"]
+  spec.authors       = ["Trung Vo"]
+  spec.email         = ["xxx@xxx.org"]
   spec.description   = %q{Unofficial Liftmaster MyQ Controller}
   spec.summary       = %q{Gem to access and control the Liftmaster MyQ garage door system.}
   spec.homepage      = "http://github.com/pfeffed/liftmaster_myq"
@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "httparty", "~> 0.12.0"
-  
+
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
 end
