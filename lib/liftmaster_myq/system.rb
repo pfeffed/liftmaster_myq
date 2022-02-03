@@ -91,7 +91,10 @@ module LiftmasterMyq
   	end
 
   	def instantiate_device(device)
-  		 	if device["MyQDeviceTypeName"] == "GarageDoorOpener"
+  			# VGDO = Virtual Garage Door Opener, it's the type for the 
+  			# Universal Smartphone Garage Door Controller
+  			opener_types = %w(GarageDoorOpener VGDO)
+  		 	if opener_types.include?(device["MyQDeviceTypeName"])
   				@garage_doors << LiftmasterMyq::Device::GarageDoor.new(device, self)
   			elsif device["MyQDeviceTypeName"] == "Gateway"
   		 		@gateways << LiftmasterMyq::Device::Gateway.new(device, self)
